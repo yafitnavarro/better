@@ -23,7 +23,7 @@
     </style>
   </head>
 
-  <body>
+  <body onload=getLocation()>
 	<h1>מציאת מרחב מוגן</h1>
     <div id="map"></div>
 	<h2>הוספת מרחב מוגן</h2>
@@ -34,6 +34,11 @@
 			</div>		
 		</form>
     <script>
+	
+    var pointx;
+
+    var pointy;
+
       var customLabel = {
         restaurant: {
           label: 'R'
@@ -43,11 +48,50 @@
         }
       };
 
-        function initMap() {
+      
+		
+		function getLocation() {
+
+    if (navigator.geolocation) {
+
+        navigator.geolocation.getCurrentPosition(showPosition);
+
+    } else { 
+
+        alert("Geolocation is not supported by this browser.");
+
+    }
+
+}
+
+
+
+function showPosition(position) {
+
+    
+
+    var pointx=position.coords.latitude;
+
+     var pointy=position.coords.longitude;
+	 alert(pointx);
+
+}
+
+
+
+
+
+  function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: new google.maps.LatLng(-25.494938, -49.294372),
+          center: new google.maps.LatLng(pointx, pointy),
           zoom: 5
         });
+
+
+
+		
+		
+		
         var infoWindow = new google.maps.InfoWindow;
 
           // Change this depending on the name of your PHP or XML file
@@ -119,6 +163,12 @@ function overlayDirections()
       + " " + document.getElementById("zip").value;
  
     gdir.load("from: " + fromAddress + " to: " + toAddress);
+	
+	
+
+
+
+	
 }
     </script>
     <script async defer
