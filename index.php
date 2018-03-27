@@ -18,7 +18,7 @@
   width:400px;  
       }
 	h2{
-		float:rigth;
+		float:right;
 	}
     </style>
   </head>
